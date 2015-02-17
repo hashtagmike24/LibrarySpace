@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="edu.csusb.libraryspace.GroupActivity"
+    android:background="#ff292f4c">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:id="@+id/nextButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffffff"
+        android:background="#ff292f4c"
+        android:paddingLeft="300dp"
+        android:nestedScrollingEnabled="true" />
+
+    <CalendarView
+        android:id="@+id/groupCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:showWeekNumber="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="250dp"
+        android:background="#ffffffff" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/nextButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="260dp"
+        android:background="#ffffffff">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_column="0">
+
+                <TextView
+                    android:layout_width="213dp"
+                    android:layout_height="wrap_content"
+                    android:text="PL-321"
+                    android:id="@+id/groupRoom1"
+                    android:layout_column="11"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:background="#ff292f4c"
+                    android:textColor="#ffffffff"
+                    android:paddingLeft="95dp" />
+
+                <TextView
+                    android:layout_width="188dp"
+                    android:layout_height="wrap_content"
+                    android:text="PL-323"
+                    android:id="@+id/groupRoom2"
+                    android:layout_column="11"
+                    android:textColor="#ffffffff"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:background="#ff292f4c"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="60dp"
+                    android:layout_gravity="left" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_column="0"
+            android:layout_marginRight="270dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/hourScroll" />
+        </LinearLayout>
+
+    </TableLayout>
+
+</RelativeLayout>

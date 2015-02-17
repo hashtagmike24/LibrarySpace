@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LibrarySpace</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_group">GroupActivity</string>
+    <string name="title_activity_individual">IndividualActivity</string>
+    <string name="title_activity_multimedia">MultimediaActivity</string>
+    <string name="title_activity_conditions">ConditionsActivity</string>
+    <string name="title_activity_booking">BookingActivity</string>
+
+</resources>
