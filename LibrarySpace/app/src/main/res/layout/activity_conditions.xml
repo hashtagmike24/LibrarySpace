@@ -26,7 +26,7 @@
             android:text="Conditions of Use"
             android:textSize="38sp"
             android:gravity="center"
-            android:paddingTop="50dp"
+            android:paddingTop="40dp"
             android:textColor="#ffffffff"
             android:background="#ff292f4c" />
 
@@ -35,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="blah"
+        android:text="Group Study Rooms may be reserved by GROUPS OF 3 OR MORE. Individuals wanting to study alone should reserve an Individual Study Carrel instead. Groups of 2 people should use one of the first-come, first-served study rooms.   Users must be CSUSB students, faculty, or staff.  If a group has not occupied the room within 10 minutes of their start time, the reservation is forfeited, and other groups may use the room. A single individual cannot &quot;hold&quot; a study room for a group arriving later.  A group with a reserved room time has priority over a group occupying that room without a reservation. We recommend that you bring your final confirmation email as proof in case of a dispute.  Reservations are limited to two hours per group, per day, with a total limit of four hours per week.   Reservations may be made up to a week in advance.   By continuing, you agree to these conditions of use."
         android:id="@+id/textView2"
         android:layout_marginTop="123dp"
         android:layout_alignParentTop="true"
@@ -52,14 +52,18 @@
         android:id="@+id/tableRow"
         android:weightSum="1">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:id="@+id/imageButton"
-            android:layout_weight="0.04"
-            android:layout_marginLeft="320dp"
-            android:layout_gravity="center"
-            android:src="@drawable/arrow" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Next"
+            android:id="@+id/button"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="#ffffffff"
+            android:background="#ff292f4c"
+            android:paddingLeft="300dp"
+            android:nestedScrollingEnabled="true" />
     </TableRow>
 
 </RelativeLayout>
