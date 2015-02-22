@@ -8,14 +8,37 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 public class BookingActivity extends ActionBarActivity {
+
+    int _month;
+    int _day;
+    int _year;
+    String _type;
+
+    TextView detailsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+
+        detailsText = (TextView) findViewById(R.id.textView2);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            _month = extras.getInt("MONTH");
+            _day = extras.getInt("DAY");
+            _year = extras.getInt("YEAR");
+            _type = extras.getString("TYPE");
+
+            detailsText.setText( _type + ": " + _month + "/" + _day + "/" + _year);
+        }
     }
 
 

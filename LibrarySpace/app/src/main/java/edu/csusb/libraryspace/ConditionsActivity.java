@@ -6,16 +6,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.concurrent.locks.Condition;
 
-
 public class ConditionsActivity extends ActionBarActivity {
+
+    int _month;
+    int _day;
+    int _year;
+    String _type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conditions);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            _month = extras.getInt("MONTH");
+            _day = extras.getInt("DAY");
+            _year = extras.getInt("YEAR");
+            _type = extras.getString("TYPE");
+
+            Toast.makeText(getApplicationContext(), _type + ": " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -47,6 +62,12 @@ public class ConditionsActivity extends ActionBarActivity {
     public void bookingButtonOnClick(View view)
     {
         Intent myIntent = new Intent(ConditionsActivity.this, BookingActivity.class);
+
+        myIntent.putExtra("MONTH", _month);
+        myIntent.putExtra("DAY", _day);
+        myIntent.putExtra("YEAR", _year);
+        myIntent.putExtra("TYPE", _type);
+
         ConditionsActivity.this.startActivity(myIntent);
     }
 }

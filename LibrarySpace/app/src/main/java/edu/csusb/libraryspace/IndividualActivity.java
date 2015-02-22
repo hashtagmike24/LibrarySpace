@@ -6,14 +6,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.CalendarView;
+import android.widget.Toast;
 
 public class IndividualActivity extends ActionBarActivity {
+
+    CalendarView myCalendar;
+    int _month;
+    int _day;
+    int _year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual);
+
+        myCalendar = (CalendarView) findViewById(R.id.individualCalendar);
+        myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                _month = month + 1;
+                _day = dayOfMonth;
+                _year = year;
+                Toast.makeText(getApplicationContext(), _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
@@ -40,11 +57,17 @@ public class IndividualActivity extends ActionBarActivity {
     }
 
     /**
-     * OnClick function for conditionsButton. Opens CondtionsActivity.
+     * OnClick function for conditionsButton. Opens ConditionsActivity.
      */
     public void conditionsButtonOnClick(View view)
     {
         Intent myIntent = new Intent(IndividualActivity.this, ConditionsActivity.class);
+
+        myIntent.putExtra("MONTH", _month);
+        myIntent.putExtra("DAY", _day);
+        myIntent.putExtra("YEAR", _year);
+        myIntent.putExtra("TYPE", "Individual Study Carrel");
+
         IndividualActivity.this.startActivity(myIntent);
     }
 }
