@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.locks.Condition;
@@ -16,6 +17,8 @@ public class ConditionsActivity extends ActionBarActivity {
     int _day;
     int _year;
     String _type;
+
+    TextView bodyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,22 @@ public class ConditionsActivity extends ActionBarActivity {
             _type = extras.getString("TYPE");
 
             Toast.makeText(getApplicationContext(), _type + ": " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
+        }
+
+
+
+        bodyText = (TextView) findViewById(R.id.bodyText);
+
+        switch(_type)
+        {
+            case "Group Study Room": bodyText.setText(getResources().getString(R.string.conditions_group_bodyText));
+                break;
+            case "Individual Study Carrel": bodyText.setText(getResources().getString(R.string.conditions_individual_bodyText));
+                break;
+            case "Multimedia Collaboration Room": bodyText.setText(getResources().getString(R.string.conditions_multimedia_bodyText));
+                break;
+            default: bodyText.setText("ERROR: No room type specified");
+                break;
         }
     }
 
