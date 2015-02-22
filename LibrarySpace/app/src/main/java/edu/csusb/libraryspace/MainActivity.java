@@ -46,4 +46,40 @@ public class MainActivity extends ActionBarActivity {
         Intent myIntent = new Intent(MainActivity.this, GroupActivity.class);
         MainActivity.this.startActivity(myIntent);
     }
+	
+	/**
+     * OnClick function for bookingButton. Opens BookingActivity.
+     */
+	public void bookingButtonOnClick(View view)
+    {
+        Intent myIntent = new Intent(MainActivity.this, BookingActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
+	
+	/**
+     * OnClick function for conditionsButton. Opens CondtionsActivity.
+     */
+	public void conditionsButtonOnClick(View view)
+    {
+        Intent myIntent = new Intent(MainActivity.this, ConditionsActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
+	
+	/**
+     * OnClick function for individualButton. Opens IndividualActivity.
+     */
+	public void individualButtonOnClick(View view)
+    {
+        Intent myIntent = new Intent(MainActivity.this, IndividualActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
+	
+	/**
+     * OnClick function for multimediaButton. Opens MultimediaActivity.
+     */
+	public void multimediaButtonOnClick(View view)
+    {
+        Intent myIntent = new Intent(MainActivity.this, MultimediaActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
 }
