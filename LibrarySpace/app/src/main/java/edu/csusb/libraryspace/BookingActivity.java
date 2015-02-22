@@ -1,9 +1,13 @@
 package edu.csusb.libraryspace;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class BookingActivity extends ActionBarActivity {
@@ -35,5 +39,24 @@ public class BookingActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * OnClick function for bookingButton. Opens BookingActivity.
+     */
+    public void mainButtonOnClick(View view)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("A confirmation email has been sent to your inbox! Please check it to confirm your booking details.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent myIntent = new Intent(BookingActivity.this, MainActivity.class);
+                        BookingActivity.this.startActivity(myIntent);
+                    }
+                });
+        AlertDialog emailPopUp = builder.create();
+        emailPopUp.show();
     }
 }

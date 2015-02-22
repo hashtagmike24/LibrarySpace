@@ -1,9 +1,13 @@
 package edu.csusb.libraryspace;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.concurrent.locks.Condition;
 
 
 public class ConditionsActivity extends ActionBarActivity {
@@ -35,5 +39,14 @@ public class ConditionsActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * OnClick function for bookingButton. Opens BookingActivity.
+     */
+    public void bookingButtonOnClick(View view)
+    {
+        Intent myIntent = new Intent(ConditionsActivity.this, BookingActivity.class);
+        ConditionsActivity.this.startActivity(myIntent);
     }
 }

@@ -1,9 +1,13 @@
 package edu.csusb.libraryspace;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.security.acl.Group;
 
 
 public class GroupActivity extends ActionBarActivity {
@@ -35,5 +39,14 @@ public class GroupActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * OnClick function for conditionsButton. Opens CondtionsActivity.
+     */
+    public void conditionsButtonOnClick(View view)
+    {
+        Intent myIntent = new Intent(GroupActivity.this, ConditionsActivity.class);
+        GroupActivity.this.startActivity(myIntent);
     }
 }

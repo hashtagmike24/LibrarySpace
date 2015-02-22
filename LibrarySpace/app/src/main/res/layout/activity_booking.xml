@@ -52,14 +52,16 @@
         android:id="@+id/tableRow"
         android:weightSum="1">
 
-        <ImageButton
+        <Button
             android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:id="@+id/imageButton"
-            android:layout_weight="0.04"
-            android:layout_marginLeft="320dp"
-            android:layout_gravity="center"
-            android:src="@drawable/arrow" />
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:id="@+id/button"
+            android:textColor="#ffffffff"
+            android:background="#ff292f4c"
+            android:paddingTop="20dp"
+            android:paddingLeft="280dp"
+            android:onClick="mainButtonOnClick"/>
     </TableRow>
 
     <EditText
