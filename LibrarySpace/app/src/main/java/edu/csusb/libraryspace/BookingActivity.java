@@ -28,7 +28,7 @@ public class BookingActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-        detailsText = (TextView) findViewById(R.id.textView2);
+        detailsText = (TextView) findViewById(R.id.detailsText);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
