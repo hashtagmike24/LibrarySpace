@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LibrarySpace</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_group">GroupActivity</string>
+    <string name="title_activity_individual">IndividualActivity</string>
+    <string name="title_activity_multimedia">MultimediaActivity</string>
+    <string name="title_activity_conditions">ConditionsActivity</string>
+    <string name="title_activity_booking">BookingActivity</string>
+    <string name="conditions_group_bodyText">Group Study Rooms may be reserved by GROUPS OF 3 OR MORE. Individuals wanting to study alone should reserve an Individual Study Carrel instead. Groups of 2 people should use one of the first-come, first-served study rooms.
+\n\nUsers must be CSUSB students, faculty, or staff.
+
+\n\nIf a group has not occupied the room within 10 minutes of their start time, the reservation is forfeited, and other groups may use the room. A single individual cannot "hold" a study room for a group arriving later.
+
+\n\nA group with a reserved room time has priority over a group occupying that room without a reservation. We recommend that you bring your final confirmation email as proof in case of a dispute.
+
+\n\nReservations are limited to two hours per group, per day, with a total limit of four hours per week.
+
+\n\nReservations may be made up to a week in advance.
+
+\n\nBy continuing, you agree to these conditions of use. </string>
+
+    <string name="conditions_individual_bodyText">Study carrels are for use by ONE PERSON! Groups should book a Group Study Room instead, or use one of the first-come, first-served group study rooms.
+
+\n\nUsers must be CSUSB students, faculty, or staff.
+
+\n\nIf you have not occupied the carrel within 10 minutes of your start time, your reservation is forfeited, and others may use the carrel.
+
+\n\nAnyone with a reserved room time has priority over someone occupying that room without a reservation. We recommend that you bring your reservation email as proof in case of a dispute.
+
+\n\nReservations are limited to two hours per day, per person.
+
+\n\nReservations may be made up to a week in advance, with a total limit of six hours per week.
+
+\n\nBy continuing, you agree to these conditions of use. </string>
+    <string name="conditions_multimedia_bodyText">The Multimedia Collaboration rooms are NOT intended for group study. They can comfortably seat from 1 to 4 people in front of the computer workstation. If you need a regular study room for your group, book a group study room instead, or use one of the first-come, first-served study rooms.
+
+\n\nUsers must be CSUSB students, faculty, or staff.
+
+\n\nIf you have not occupied the room within 10 minutes of your start time, your reservation is forfeited, and others may use the room.
+
+\n\nAnyone with a reserved room time has priority over someone occupying that room without a reservation. We recommend that you bring your reservation email as proof in case of a dispute.
+
+\n\nReservations are limited to two hours per user/group, per day, with a total limit of four hours per week.
+
+\n\nReservations may be made up to a week in advance.
+
+\n\nBy continuing, you agree to these conditions of use. </string>
+
+</resources>
