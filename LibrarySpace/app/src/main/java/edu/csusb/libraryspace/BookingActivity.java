@@ -41,7 +41,7 @@ public class BookingActivity extends ActionBarActivity {
             _room = extras.getString("ROOM");
             _hour = extras.getString("HOUR");
 
-            detailsText.setText(_room + " during " + _hour + " on " + _month + "/" + _day + "/" + _year);
+            detailsText.setText(_room + " from " + _hour + " on " + _month + "/" + _day + "/" + _year);
         }
     }
 

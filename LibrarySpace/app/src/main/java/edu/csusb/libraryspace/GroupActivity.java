@@ -41,7 +41,7 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         roomSpinner.setOnItemSelectedListener(this);
 
         hourSpinner = (Spinner) findViewById(R.id.hourSpinner);
-        String[] hours = {"9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM"};
+        String[] hours = {"9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 2:00 PM", "2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5:00 PM - 6:00 PM", "6:00 PM - 7:00 PM", "7:00 PM - 8:00 PM", "8:00 PM - 9:00 PM"};
         ArrayAdapter<String> adapter_state2 = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, hours);
         adapter_state2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         hourSpinner.setAdapter(adapter_state2);
@@ -111,9 +111,9 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         if(_room.equals(""))
             _room = "PL-321";
         if(_hour.equals(""))
-            _hour = "8:00 AM";
+            _hour = "9:00 AM - 10:00 AM";
 
-        if(_day == 0);
+        if(_day == 0)
         {
             Calendar calendar = Calendar.getInstance();
             _day = calendar.get(Calendar.DAY_OF_MONTH);

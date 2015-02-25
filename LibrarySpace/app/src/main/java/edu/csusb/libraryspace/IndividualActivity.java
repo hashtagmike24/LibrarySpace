@@ -40,7 +40,7 @@ public class IndividualActivity extends ActionBarActivity implements OnItemSelec
         roomSpinner.setOnItemSelectedListener(this);
 
         hourSpinner = (Spinner) findViewById(R.id.hourSpinner);
-        String[] hours = {"9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM"};
+        String[] hours = {"9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 2:00 PM", "2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5:00 PM - 6:00 PM", "6:00 PM - 7:00 PM", "7:00 PM - 8:00 PM", "8:00 PM - 9:00 PM"};
         ArrayAdapter<String> adapter_state2 = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, hours);
         adapter_state2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         hourSpinner.setAdapter(adapter_state2);
@@ -53,7 +53,6 @@ public class IndividualActivity extends ActionBarActivity implements OnItemSelec
                 _month = month + 1;
                 _day = dayOfMonth;
                 _year = year;
-                Toast.makeText(getApplicationContext(), _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -111,9 +110,9 @@ public class IndividualActivity extends ActionBarActivity implements OnItemSelec
         if(_room.equals(""))
             _room = "Carrel F4-13";
         if(_hour.equals(""))
-            _hour = "8:00 AM";
+            _hour = "9:00 AM - 10:00 AM";
 
-        if(_day == 0);
+        if(_day == 0)
         {
             Calendar calendar = Calendar.getInstance();
             _day = calendar.get(Calendar.DAY_OF_MONTH);

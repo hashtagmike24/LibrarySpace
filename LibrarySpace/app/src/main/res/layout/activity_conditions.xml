@@ -1,54 +1,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    tools:context="edu.csusb.libraryspace.ConditionsActivity">
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff15008f"
-        android:id="@+id/NameField"
-        android:weightSum="1"
-        android:layout_above="@+id/bodyText"
-        android:layout_marginBottom="-100dp"
-        android:layout_alignParentTop="true">
+    tools:context="edu.csusb.libraryspace.ConditionsActivity"
+    android:gravity="top">
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Conditions of Use"
-            android:textSize="38sp"
-            android:gravity="center"
+            android:id="@+id/conditionsHeaderText"
+            android:layout_gravity="center_horizontal"
+            android:background="#ff292f4c"
             android:textColor="#ffffffff"
-            android:background="#ff292f4c" />
-
-    </TableRow>
+            android:gravity="center"
+            android:textSize="38sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/conditions_group_bodyText"
+        android:layout_below="@id/conditionsHeaderText"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:id="@+id/bodyText"
-        android:layout_marginTop="100dp"
-        android:textSize="12dp"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
-    <TableRow
-        android:layout_width="400dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:background="#ff292f4c"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/tableRow"
-        android:weightSum="1">
 
         <Button
             android:layout_width="fill_parent"
@@ -63,6 +42,5 @@
             android:nestedScrollingEnabled="true"
             android:gravity="center_horizontal|center_vertical"
             android:onClick="bookingButtonOnClick" />
-    </TableRow>
 
 </RelativeLayout>
