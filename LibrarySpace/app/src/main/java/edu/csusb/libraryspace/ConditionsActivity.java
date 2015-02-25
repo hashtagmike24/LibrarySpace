@@ -17,6 +17,8 @@ public class ConditionsActivity extends ActionBarActivity {
     int _day;
     int _year;
     String _type;
+    String _room;
+    String _hour;
 
     TextView bodyText;
 
@@ -31,8 +33,10 @@ public class ConditionsActivity extends ActionBarActivity {
             _day = extras.getInt("DAY");
             _year = extras.getInt("YEAR");
             _type = extras.getString("TYPE");
+            _room = extras.getString("ROOM");
+            _hour = extras.getString("HOUR");
 
-            Toast.makeText(getApplicationContext(), _type + ": " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), _room + " during " + _hour + " on " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
         }
 
 
@@ -86,6 +90,8 @@ public class ConditionsActivity extends ActionBarActivity {
         myIntent.putExtra("DAY", _day);
         myIntent.putExtra("YEAR", _year);
         myIntent.putExtra("TYPE", _type);
+        myIntent.putExtra("ROOM", _room);
+        myIntent.putExtra("HOUR", _hour);
 
         ConditionsActivity.this.startActivity(myIntent);
     }

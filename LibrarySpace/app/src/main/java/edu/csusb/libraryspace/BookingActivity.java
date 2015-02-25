@@ -20,6 +20,8 @@ public class BookingActivity extends ActionBarActivity {
     int _day;
     int _year;
     String _type;
+    String _room;
+    String _hour;
 
     TextView detailsText;
 
@@ -36,8 +38,10 @@ public class BookingActivity extends ActionBarActivity {
             _day = extras.getInt("DAY");
             _year = extras.getInt("YEAR");
             _type = extras.getString("TYPE");
+            _room = extras.getString("ROOM");
+            _hour = extras.getString("HOUR");
 
-            detailsText.setText( _type + ": " + _month + "/" + _day + "/" + _year);
+            detailsText.setText(_room + " during " + _hour + " on " + _month + "/" + _day + "/" + _year);
         }
     }
 

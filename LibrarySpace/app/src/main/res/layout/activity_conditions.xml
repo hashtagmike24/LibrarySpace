@@ -9,15 +9,13 @@
 
     <TableRow
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:background="#ff15008f"
-        android:layout_alignParentTop="true"
         android:id="@+id/NameField"
-        android:layout_marginBottom="440dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="0dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_above="@+id/bodyText"
+        android:layout_marginBottom="-100dp"
+        android:layout_alignParentTop="true">
 
         <TextView
             android:layout_width="fill_parent"
@@ -26,7 +24,6 @@
             android:text="Conditions of Use"
             android:textSize="38sp"
             android:gravity="center"
-            android:paddingTop="50dp"
             android:textColor="#ffffffff"
             android:background="#ff292f4c" />
 
@@ -54,14 +51,17 @@
         android:weightSum="1">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Next"
-            android:id="@+id/button"
+            android:id="@+id/nextButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:textColor="#ffffffff"
             android:background="#ff292f4c"
-            android:paddingTop="20dp"
-            android:paddingLeft="280dp"
+            android:nestedScrollingEnabled="true"
+            android:gravity="center_horizontal|center_vertical"
             android:onClick="bookingButtonOnClick" />
     </TableRow>
 
