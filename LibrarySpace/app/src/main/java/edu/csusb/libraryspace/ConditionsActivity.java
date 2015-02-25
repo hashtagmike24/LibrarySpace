@@ -36,7 +36,7 @@ public class ConditionsActivity extends ActionBarActivity {
             _room = extras.getString("ROOM");
             _hour = extras.getString("HOUR");
 
-            Toast.makeText(getApplicationContext(), _room + " from " + _hour + " on " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), _room + " " + _hour + " on " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
         }
 
 

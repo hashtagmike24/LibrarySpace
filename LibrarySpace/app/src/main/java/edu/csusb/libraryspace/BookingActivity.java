@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,9 @@ public class BookingActivity extends ActionBarActivity {
     String _hour;
 
     TextView detailsText;
+    EditText nameInput;
+    EditText emailInput;
+    EditText labelInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public class BookingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_booking);
 
         detailsText = (TextView) findViewById(R.id.detailsText);
+        nameInput = (EditText) findViewById(R.id.nameInput);
+        emailInput = (EditText) findViewById(R.id.emailInput);
+        labelInput = (EditText) findViewById(R.id.labelInput);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -41,7 +48,7 @@ public class BookingActivity extends ActionBarActivity {
             _room = extras.getString("ROOM");
             _hour = extras.getString("HOUR");
 
-            detailsText.setText(_room + " from " + _hour + " on " + _month + "/" + _day + "/" + _year);
+            detailsText.setText(_room + " " + _hour + " on " + _month + "/" + _day + "/" + _year);
         }
     }
 
@@ -73,17 +80,28 @@ public class BookingActivity extends ActionBarActivity {
      */
     public void mainButtonOnClick(View view)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("A confirmation email has been sent to your inbox! Please check it to confirm your booking details.")
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent myIntent = new Intent(BookingActivity.this, MainActivity.class);
-                        BookingActivity.this.startActivity(myIntent);
-                    }
-                });
-        AlertDialog emailPopUp = builder.create();
-        emailPopUp.show();
+        if(nameInput.getText().toString().equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Please enter a valid name", Toast.LENGTH_LONG).show();
+        }
+        else if(emailInput.getText().toString().equals("") || !emailInput.getText().toString().contains("csusb.edu"))
+        {
+            Toast.makeText(getApplicationContext(), "Please enter a valid school email (must be a @coyote.csusb.edu or @csusb.edu email address)", Toast.LENGTH_LONG).show();
+        }
+        else // if no errors
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("A confirmation email has been sent to your inbox! Please check it to confirm your booking details.")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent myIntent = new Intent(BookingActivity.this, MainActivity.class);
+                            BookingActivity.this.startActivity(myIntent);
+                        }
+                    });
+            AlertDialog emailPopUp = builder.create();
+            emailPopUp.show();
+        }
     }
 }

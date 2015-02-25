@@ -40,7 +40,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,10 +51,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp" />
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Please enter your first and last name"
         android:textColor="#C5C5C5"
         android:layout_below="@id/fullNameText"
         android:id="@+id/nameInput"
@@ -69,10 +68,10 @@
         android:layout_marginTop="40dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Please enter your school email"
+        android:text=""
         android:textColor="#C5C5C5"
         android:inputType="textEmailAddress"
         android:id="@+id/emailInput"
@@ -82,7 +81,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Enter @coyote.csusb.edu or @csusb.edu addresses only"
+        android:text="Must be a valid @coyote.csusb.edu or @csusb.edu email"
+        android:textSize="10sp"
         android:id="@+id/reminderEmailText"
         android:layout_below="@+id/emailInput"
         android:layout_marginLeft="15dp" />
@@ -97,11 +97,10 @@
         android:layout_marginLeft="10dp" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/labelInput"
         android:layout_below="@id/publicLabelText"
-        android:text="Please enter your public booking label"
         android:textColor="#C5C5C5"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_marginLeft="10dp"/>
