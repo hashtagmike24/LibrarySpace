@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="edu.csusb.libraryspace.BookingActivity"
+    android:background="#ffe7e8ea"
     android:gravity="top">
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         android:id="@+id/detailsText"
         android:paddingTop="20dp"
         android:textSize="14sp"
-        android:textColor="#000000"
+        android:textColor="#ff21b1e0"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -44,9 +45,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Full Name*"
+        android:text="Full Name: *"
         android:layout_below="@id/maxText"
         android:id="@+id/fullNameText"
+        android:textColor="#000000"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp" />
@@ -54,17 +56,19 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#C5C5C5"
+        android:textColor="#ff717171"
         android:layout_below="@id/fullNameText"
+        android:inputType="textPersonName"
         android:id="@+id/nameInput"
         android:layout_marginLeft="10dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email*"
+        android:text="Email: *"
+        android:textColor="#000000"
         android:id="@+id/emailText"
         android:layout_below="@id/nameInput"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="40dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     <EditText
@@ -72,7 +76,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
-        android:textColor="#C5C5C5"
+        android:textColor="#ff717171"
         android:inputType="textEmailAddress"
         android:id="@+id/emailInput"
         android:layout_below="@id/emailText"
@@ -91,7 +95,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Public Booking Label"
+        android:textColor="#000000"
         android:id="@+id/publicLabelText"
+        android:inputType="textPersonName"
         android:layout_below="@+id/reminderEmailText"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="10dp" />
@@ -101,7 +107,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/labelInput"
         android:layout_below="@id/publicLabelText"
-        android:textColor="#C5C5C5"
+        android:textColor="#ff717171"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_marginLeft="10dp"/>
 

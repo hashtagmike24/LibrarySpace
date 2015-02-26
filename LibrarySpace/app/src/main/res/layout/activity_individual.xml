@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="edu.csusb.libraryspace.IndividualActivity"
-    android:background="#ff292f4c"
+    android:background="#ffe7e8ea"
     android:gravity="top">
 
     <CalendarView
@@ -16,8 +16,63 @@
         android:showWeekNumber="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="300dp"
+        android:layout_marginBottom="340dp"
         android:background="#ffffffff" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="-40dp"
+        android:id="@+id/divider"
+        android:layout_alignBottom="@+id/individualCalendar"
+        android:layout_centerHorizontal="true"
+        android:background="#ff2b314d" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select an individual study carrel: "
+        android:id="@+id/roomText"
+        android:layout_below="@+id/divider"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:id="@+id/roomSpinner"
+        android:layout_below="@+id/roomText"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select an hour of reservation: "
+        android:id="@+id/hourText"
+        android:layout_below="@+id/roomSpinner"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/hourSpinner"
+        android:layout_below="@+id/hourText"
+        android:gravity="center"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="fill_parent"
@@ -31,27 +86,5 @@
         android:background="#ff292f4c"
         android:gravity="center_horizontal|center_vertical"
         android:onClick="conditionsButtonOnClick" />
-
-    <Spinner
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="90dp"
-        android:layout_marginRight="90dp"
-        android:id="@+id/roomSpinner"
-        android:layout_above="@+id/nextButton"
-        android:background="#ffffff"
-        android:layout_marginBottom="170dp" />
-
-    <Spinner
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/hourSpinner"
-        android:layout_above="@+id/nextButton"
-        android:layout_marginBottom="90dp"
-        android:background="#ffffff"
-        android:layout_marginLeft="90dp"
-        android:layout_marginRight="90dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
