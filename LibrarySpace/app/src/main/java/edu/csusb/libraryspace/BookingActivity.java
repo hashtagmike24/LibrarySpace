@@ -91,7 +91,7 @@ public class BookingActivity extends ActionBarActivity {
         else // if no errors
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("A confirmation email has been sent to your inbox! Please check it to confirm your booking details.")
+            builder.setMessage("A confirmation email has been sent to your inbox! Please check it to confirm your booking details.\n\nPlease note that reservations must be confirmed within 15 minutes. Your room reservation is not finalized until you click the link in the email.")
                     .setCancelable(false)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override

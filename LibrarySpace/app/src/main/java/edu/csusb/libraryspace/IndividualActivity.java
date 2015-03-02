@@ -1,6 +1,9 @@
 package edu.csusb.libraryspace;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -128,5 +131,25 @@ public class IndividualActivity extends ActionBarActivity implements OnItemSelec
         myIntent.putExtra("HOUR", _hour);
 
         IndividualActivity.this.startActivity(myIntent);
+    }
+
+    public void pdfButtonOnClick(View view)
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lib.csusb.edu/documents/floorMaps/group_study.pdf")));
+    }
+
+    public void descriptionButtonOnClick(View view)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("The Library has two Individual Study Carrels (F4-13 & F4-14) that can be reserved.\n\nBoth have a built-in desk and chair.\n\nThese carrels are intended for use by an individual student.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog emailPopUp = builder.create();
+        emailPopUp.show();
     }
 }

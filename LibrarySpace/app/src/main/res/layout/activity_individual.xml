@@ -16,13 +16,13 @@
         android:showWeekNumber="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="340dp"
+        android:layout_marginBottom="350dp"
         android:background="#ffffffff" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="-40dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="-20dp"
         android:id="@+id/divider"
         android:layout_alignBottom="@+id/individualCalendar"
         android:layout_centerHorizontal="true"
@@ -34,13 +34,13 @@
         android:text="Select an individual study carrel: "
         android:id="@+id/roomText"
         android:layout_below="@+id/divider"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -62,7 +62,7 @@
         android:layout_alignParentStart="true" />
 
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -73,6 +73,42 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TableRow
+        android:layout_above="@id/nextButton"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal|bottom">
+
+        <Button
+            android:layout_width="140dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="wrap_content"
+            android:text="View Map of Study Rooms (PDF)"
+            android:id="@+id/pdfButton"
+            android:layout_above="@+id/nextButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#ffffffff"
+            android:background="#ff292f4c"
+            android:onClick="pdfButtonOnClick"
+            android:textSize="12sp"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="140dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:text="Description of Room"
+            android:layout_marginBottom="10dp"
+            android:textColor="#ffffffff"
+            android:background="#ff292f4c"
+            android:textSize="12sp"
+            android:onClick="descriptionButtonOnClick"
+            android:id="@+id/descriptionButton" />
+    </TableRow>
 
     <Button
         android:layout_width="fill_parent"

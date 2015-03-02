@@ -1,6 +1,9 @@
 package edu.csusb.libraryspace;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -129,5 +132,25 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         myIntent.putExtra("HOUR", _hour);
 
         GroupActivity.this.startActivity(myIntent);
+    }
+
+    public void pdfButtonOnClick(View view)
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lib.csusb.edu/documents/floorMaps/group_study.pdf")));
+    }
+
+    public void descriptionButtonOnClick(View view)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("The Library has two Group Study Rooms (PL-321 & PL-323) that can be reserved.\n\nBoth have two tables, 8 chairs, and a whiteboard.\n\nThese rooms are intended for use by a small to moderate-sized group.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog emailPopUp = builder.create();
+        emailPopUp.show();
     }
 }
