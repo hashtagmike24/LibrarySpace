@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +17,8 @@ public class ConditionsActivity extends ActionBarActivity {
     int _day;
     int _year;
     String _type;
+    String _room;
+    String _hour;
 
     TextView bodyText;
 
@@ -33,8 +33,10 @@ public class ConditionsActivity extends ActionBarActivity {
             _day = extras.getInt("DAY");
             _year = extras.getInt("YEAR");
             _type = extras.getString("TYPE");
+            _room = extras.getString("ROOM");
+            _hour = extras.getString("HOUR");
 
-            Toast.makeText(getApplicationContext(), _type + ": " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), _room + " " + _hour + " on " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
         }
 
 
@@ -52,13 +54,6 @@ public class ConditionsActivity extends ActionBarActivity {
             default: bodyText.setText("ERROR: No room type specified");
                 break;
         }
-
-        setContentView(R.layout.activity_group);
-        String[] items = {"8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM" , "12:00 PM"};
-
-        ListView listView = (ListView) findViewById(R.id.listHours);
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items));
-
     }
 
 
@@ -95,6 +90,8 @@ public class ConditionsActivity extends ActionBarActivity {
         myIntent.putExtra("DAY", _day);
         myIntent.putExtra("YEAR", _year);
         myIntent.putExtra("TYPE", _type);
+        myIntent.putExtra("ROOM", _room);
+        myIntent.putExtra("HOUR", _hour);
 
         ConditionsActivity.this.startActivity(myIntent);
     }

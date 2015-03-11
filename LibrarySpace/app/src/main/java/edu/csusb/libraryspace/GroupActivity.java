@@ -1,27 +1,54 @@
 package edu.csusb.libraryspace;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CalendarView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.security.acl.Group;
+import java.util.Calendar;
 
-public class GroupActivity extends ActionBarActivity {
+public class GroupActivity extends ActionBarActivity implements OnItemSelectedListener {
 
     CalendarView myCalendar;
-    int _month;
-    int _day;
-    int _year;
+    int _month = 0;
+    int _day = 0;
+    int _year = 0;
+
+    Spinner roomSpinner;
+    String _room;
+    Spinner hourSpinner;
+    String _hour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
+
+        roomSpinner = (Spinner) findViewById(R.id.roomSpinner);
+        String[] rooms = {"PL-321", "PL-323"};
+        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, rooms);
+        adapter_state.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        roomSpinner.setAdapter(adapter_state);
+        roomSpinner.setOnItemSelectedListener(this);
+
+        hourSpinner = (Spinner) findViewById(R.id.hourSpinner);
+        String[] hours = {"9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 2:00 PM", "2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5:00 PM - 6:00 PM", "6:00 PM - 7:00 PM", "7:00 PM - 8:00 PM", "8:00 PM - 9:00 PM"};
+        ArrayAdapter<String> adapter_state2 = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, hours);
+        adapter_state2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        hourSpinner.setAdapter(adapter_state2);
+        hourSpinner.setOnItemSelectedListener(this);
 
         myCalendar = (CalendarView) findViewById(R.id.groupCalendar);
         myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -30,11 +57,30 @@ public class GroupActivity extends ActionBarActivity {
                 _month = month + 1;
                 _day = dayOfMonth;
                 _year = year;
-                Toast.makeText(getApplicationContext(), _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                               long id) {
+        Spinner spinner = (Spinner) parent;
+
+        if(spinner.getId() == R.id.roomSpinner)
+        {
+            roomSpinner.setSelection(position);
+            _room = (String) roomSpinner.getSelectedItem();
+        }
+        else if(spinner.getId() == R.id.hourSpinner)
+        {
+            hourSpinner.setSelection(position);
+            _hour = (String) hourSpinner.getSelectedItem();
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> arg0)
+    {
+        // TODO
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,11 +111,46 @@ public class GroupActivity extends ActionBarActivity {
     {
         Intent myIntent = new Intent(GroupActivity.this, ConditionsActivity.class);
 
+        if(_room.equals(""))
+            _room = "PL-321";
+        if(_hour.equals(""))
+            _hour = "9:00 AM - 10:00 AM";
+
+        if(_day == 0)
+        {
+            Calendar calendar = Calendar.getInstance();
+            _day = calendar.get(Calendar.DAY_OF_MONTH);
+            _month = calendar.get(Calendar.MONTH) + 1;
+            _year = calendar.get(Calendar.YEAR);
+        }
+
         myIntent.putExtra("MONTH", _month);
         myIntent.putExtra("DAY", _day);
         myIntent.putExtra("YEAR", _year);
         myIntent.putExtra("TYPE", "Group Study Room");
+        myIntent.putExtra("ROOM", _room);
+        myIntent.putExtra("HOUR", _hour);
 
         GroupActivity.this.startActivity(myIntent);
+    }
+
+    public void pdfButtonOnClick(View view)
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lib.csusb.edu/documents/floorMaps/group_study.pdf")));
+    }
+
+    public void descriptionButtonOnClick(View view)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("The Library has two Group Study Rooms (PL-321 & PL-323) that can be reserved.\n\nBoth have two tables, 8 chairs, and a whiteboard.\n\nThese rooms are intended for use by a small to moderate-sized group.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog emailPopUp = builder.create();
+        emailPopUp.show();
     }
 }

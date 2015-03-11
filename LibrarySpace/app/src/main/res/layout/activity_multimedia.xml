@@ -1,24 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context="edu.csusb.libraryspace.MultimediaActivity"
-    android:background="#ff292f4c"
-    android:onClick="conditionsButtonOnClick">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        android:id="@+id/nextButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="#ffffffff"
-        android:background="#ff292f4c"
-        android:nestedScrollingEnabled="true" />
+    android:background="#ffe7e8ea"
+    android:gravity="top">
 
     <CalendarView
         android:id="@+id/multimediaCalendar"
@@ -29,71 +16,111 @@
         android:showWeekNumber="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="250dp"
+        android:layout_marginBottom="350dp"
         android:background="#ffffffff" />
 
-    <TableLayout
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginBottom="-20dp"
+        android:id="@+id/divider"
+        android:layout_alignBottom="@+id/multimediaCalendar"
+        android:layout_centerHorizontal="true"
+        android:background="#ff2b314d" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a multimedia collaboration room: "
+        android:id="@+id/roomText"
+        android:layout_below="@+id/divider"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:id="@+id/roomSpinner"
+        android:layout_below="@+id/roomText"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select an hour of reservation: "
+        android:id="@+id/hourText"
+        android:layout_below="@+id/roomSpinner"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/hourSpinner"
+        android:layout_below="@+id/hourText"
+        android:gravity="center"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:id="@+id/nextButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffffff"
+        android:background="#ff292f4c"
+        android:gravity="center_horizontal|center_vertical"
+        android:onClick="conditionsButtonOnClick" />
+
+    <TableRow
+        android:layout_above="@id/nextButton"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/nextButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="260dp"
-        android:background="#ffffffff">
+        android:gravity="center_horizontal|bottom">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        <Button
+            android:layout_width="140dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="wrap_content"
+            android:text="View Map of Study Rooms (PDF)"
+            android:id="@+id/pdfButton"
+            android:layout_above="@+id/nextButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#ffffffff"
+            android:background="#ff292f4c"
+            android:onClick="pdfButtonOnClick"
+            android:textSize="12sp"
+            android:layout_centerHorizontal="true" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_column="0"
-                android:background="#ff313752">
-
-                <TextView
-                    android:layout_width="197dp"
-                    android:layout_height="wrap_content"
-                    android:text="PL-5005F"
-                    android:id="@+id/multimediaRoom1"
-                    android:layout_column="11"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:background="#ff292f4c"
-                    android:textColor="#ffffffff"
-                    android:paddingLeft="95dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PL-5005J"
-                    android:id="@+id/multimediaRoom2"
-                    android:layout_column="11"
-                    android:textColor="#ffffffff"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:background="#ff292f4c"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="50dp"
-                    android:layout_gravity="left" />
-            </LinearLayout>
-
-        </TableRow>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="300dp"
-            android:layout_height="fill_parent"
-            android:layout_column="0"
-            android:layout_marginRight="270dp">
-
-            <ListView
-                android:layout_width="357dp"
-                android:layout_height="fill_parent"
-                android:id="@+id/listHours" />
-        </LinearLayout>
-
-    </TableLayout>
+        <Button
+            android:layout_width="140dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:text="Description of Room"
+            android:layout_marginBottom="10dp"
+            android:textColor="#ffffffff"
+            android:background="#ff292f4c"
+            android:textSize="12sp"
+            android:onClick="descriptionButtonOnClick"
+            android:id="@+id/descriptionButton" />
+    </TableRow>
 
 </RelativeLayout>
