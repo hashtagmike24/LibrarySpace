@@ -7,17 +7,20 @@
     android:gravity="top"
     android:background="#ffe7e8ea">
 
-        <TextView
+    <TextView
             android:layout_width="match_parent"
-            android:layout_height="94dp"
+            android:layout_height="150dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Conditions of Use"
             android:id="@+id/conditionsHeaderText"
             android:layout_gravity="center_horizontal"
-            android:background="#ff292f4c"
+            android:src="@drawable/library"
             android:textColor="#ffffffff"
-            android:gravity="center"
-            android:textSize="38sp" />
+            android:gravity="center|bottom"
+            android:textSize="38sp"
+        android:background="@drawable/library"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false" />
 
     <TextView
         android:layout_width="match_parent"
