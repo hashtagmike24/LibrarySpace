@@ -20,8 +20,8 @@
         <item>10:00 PM</item>
     </string-array>
 
-    <string name="app_name">CSUSB Library Space</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">CSUSB Library Study Space</string>
+    <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_group">GroupActivity</string>
     <string name="title_activity_individual">IndividualActivity</string>
@@ -67,5 +67,6 @@
 \n\nReservations may be made up to a week in advance.
 
 \n\nBy continuing, you agree to these conditions of use. </string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 
 </resources>
