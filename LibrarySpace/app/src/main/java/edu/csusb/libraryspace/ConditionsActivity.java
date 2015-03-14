@@ -1,6 +1,7 @@
 package edu.csusb.libraryspace;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +27,21 @@ public class ConditionsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conditions);
+
+        // Font path
+        String fontPath = "fonts/dosis-regular.ttf";
+        String thickPath = "fonts/dosis-medium.ttf";
+        // text view label
+        TextView txtConditionsHeaderText = (TextView) findViewById(R.id.conditionsHeaderText);
+        TextView txtBodyText = (TextView) findViewById(R.id.bodyText);
+        TextView txtNextText = (TextView) findViewById(R.id.nextButton);
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(),fontPath);
+        Typeface tf2 = Typeface.createFromAsset(getAssets(), thickPath);
+        // Applying font
+        txtConditionsHeaderText.setTypeface(tf2);
+        txtBodyText.setTypeface(tf);
+        txtNextText.setTypeface(tf2);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {

@@ -3,6 +3,7 @@ package edu.csusb.libraryspace;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,6 +34,33 @@ public class BookingActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+
+        // Font path
+        String fontPath = "fonts/dosis-regular.ttf";
+        String thickPath = "fonts/dosis-medium.ttf";
+        // text view label
+        TextView txtBookingHeader = (TextView) findViewById(R.id.bookingHeader);
+        TextView txtDetailsText = (TextView) findViewById(R.id.detailsText);
+        TextView txtMaxText = (TextView) findViewById(R.id.maxText);
+        TextView txtFullNameText = (TextView) findViewById(R.id.fullNameText);
+        TextView txtEmailText = (TextView) findViewById(R.id.emailText);
+        TextView txtReminderEmailText = (TextView) findViewById(R.id.reminderEmailText);
+        TextView txtPublicLabelText = (TextView) findViewById(R.id.publicLabelText);
+        TextView txtRequiredFieldsText = (TextView) findViewById(R.id.requiredFieldsText);
+        TextView txtSubmitButtonText = (TextView) findViewById(R.id.button);
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+        Typeface tf2 = Typeface.createFromAsset(getAssets(), thickPath);
+        // Applying font
+        txtBookingHeader.setTypeface(tf2);
+        txtDetailsText.setTypeface(tf2);
+        txtMaxText.setTypeface(tf);
+        txtFullNameText.setTypeface(tf);
+        txtEmailText.setTypeface(tf);
+        txtReminderEmailText.setTypeface(tf);
+        txtPublicLabelText.setTypeface(tf);
+        txtRequiredFieldsText.setTypeface(tf);
+        txtSubmitButtonText.setTypeface(tf2);
 
         detailsText = (TextView) findViewById(R.id.detailsText);
         nameInput = (EditText) findViewById(R.id.nameInput);

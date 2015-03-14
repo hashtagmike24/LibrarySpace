@@ -9,9 +9,9 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="94dp"
+            android:layout_height="84dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Conditions of Use"
+            android:text="CONDITIONS OF USE"
             android:id="@+id/conditionsHeaderText"
             android:layout_gravity="center_horizontal"
             android:background="#ff292f4c"

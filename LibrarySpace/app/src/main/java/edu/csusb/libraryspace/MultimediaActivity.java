@@ -3,6 +3,7 @@ package edu.csusb.libraryspace;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CalendarView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -34,6 +36,25 @@ public class MultimediaActivity extends ActionBarActivity implements OnItemSelec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multimedia);
+
+        // Font path
+        String fontPath = "fonts/dosis-regular.ttf";
+        String thickPath = "fonts/dosis-medium.ttf";
+        // text view label
+        TextView txtRoomText = (TextView) findViewById(R.id.roomText);
+        TextView txtHourText = (TextView) findViewById(R.id.hourText);
+        TextView txtPDFText = (TextView) findViewById(R.id.pdfButton);
+        TextView txtDescriptionText = (TextView) findViewById(R.id.descriptionButton);
+        TextView txtNextText = (TextView) findViewById(R.id.nextButton);
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+        Typeface tf2 = Typeface.createFromAsset(getAssets(), thickPath);
+        // Applying font
+        txtRoomText.setTypeface(tf);
+        txtHourText.setTypeface(tf);
+        txtPDFText.setTypeface(tf2);
+        txtDescriptionText.setTypeface(tf2);
+        txtNextText.setTypeface(tf2);
 
         roomSpinner = (Spinner) findViewById(R.id.roomSpinner);
         String[] rooms = {"PL-5005F", "PL-5005J"};

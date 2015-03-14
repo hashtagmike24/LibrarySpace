@@ -8,15 +8,16 @@
     android:gravity="top">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="94dp"
+        android:layout_height="84dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Booking Details"
+        android:text="BOOKING DETAILS"
         android:id="@+id/bookingHeader"
         android:layout_gravity="center_horizontal"
         android:background="#ff292f4c"
         android:textColor="#ffffffff"
         android:gravity="center"
-        android:textSize="38sp" />
+        android:textSize="38sp"
+        android:layout_alignParentStart="false" />
 
     <TextView
         android:layout_width="match_parent"
@@ -132,7 +133,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:text="Next"
+            android:text="SUBMIT"
             android:id="@+id/button"
             android:textColor="#ffffffff"
             android:background="#ff292f4c"
