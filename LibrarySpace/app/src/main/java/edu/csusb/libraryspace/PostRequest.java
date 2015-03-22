@@ -17,6 +17,17 @@ public class PostRequest extends AsyncTask<String, Void, String>
     OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    public AsyncResponsePOST listener;
+    //public AsyncResponse delegate=null;
+    public interface AsyncResponsePOST
+    {
+        void processPOSTFinish(String output);
+    }
+    public PostRequest(AsyncResponsePOST listener)
+    {
+        this.listener = listener;
+    }
+
     @Override
     protected String doInBackground(String... params) // 1st param is url, 2nd is json
     {
@@ -45,6 +56,6 @@ public class PostRequest extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String result)
     {
-
+        listener.processPOSTFinish(result);
     }
 }

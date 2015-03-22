@@ -35,34 +35,26 @@ import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GroupActivity extends ActionBarActivity implements OnItemSelectedListener, GetRequest.AsyncResponseGET {
+public class GroupActivity extends ActionBarActivity implements OnItemSelectedListener, PostRequest.AsyncResponsePOST {
 
     CalendarView myCalendar;
     int _month = 0;
     int _day = 0;
     int _year = 0;
 
+    String formattedDate;
+
     Spinner roomSpinner;
     String _room;
     Spinner hourSpinner;
     String _hour;
 
-    String web_data;
-    GetRequest getRequest = new GetRequest(this);
-    PostRequest postRequest = new PostRequest();
+    PostRequest postRequest = new PostRequest(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
-
-        getRequest.listener = this;
-
-        // Network connection
-        //getRequest.execute("http://www.lib.csusb.edu/services/studyRooms.html");
-        String json = makeJSON("2015-03-23");
-        postRequest.execute("http://csusb.libcal.com/process_roombookings.php?m=calscroll&gid=1787&date=2015-03-23", json); // Works whenever it feels like it. Don't piss off the CSUSB web server gods pls
-
 
         // Font path
         String fontPath = "fonts/dosis-regular.ttf";
@@ -91,7 +83,7 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         roomSpinner.setOnItemSelectedListener(this);
 
         hourSpinner = (Spinner) findViewById(R.id.hourSpinner);
-        String[] hours = {"9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 2:00 PM", "2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5:00 PM - 6:00 PM", "6:00 PM - 7:00 PM", "7:00 PM - 8:00 PM", "8:00 PM - 9:00 PM"};
+        String[] hours = {"8:00 AM - 9:00AM", "9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 2:00 PM", "2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5:00 PM - 6:00 PM", "6:00 PM - 7:00 PM", "7:00 PM - 8:00 PM", "8:00 PM - 9:00 PM"};
         ArrayAdapter<String> adapter_state2 = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, hours);
         adapter_state2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         hourSpinner.setAdapter(adapter_state2);
@@ -104,11 +96,26 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
                 _month = month + 1;
                 _day = dayOfMonth;
                 _year = year;
+                formattedDate = _year + "-" + _month + "-" + _day;
+
+                // Update Hours
+                String json = makeJSON(formattedDate);
+                PostRequest pr = new PostRequest(GroupActivity.this);
+                pr.execute("http://csusb.libcal.com/process_roombookings.php?m=calscroll&gid=1787&date=" + formattedDate, json);
             }
         });
 
         myCalendar.setMinDate(System.currentTimeMillis() - 1000);
         myCalendar.setMaxDate(myCalendar.getDate() + (86400000 * 7)); // dat magic number doe
+
+        if(_day == 0)
+        {
+            Calendar calendar = Calendar.getInstance();
+            _day = calendar.get(Calendar.DAY_OF_MONTH);
+            _month = calendar.get(Calendar.MONTH) + 1;
+            _year = calendar.get(Calendar.YEAR);
+            formattedDate = _year + "-" + _month + "-" + _day;
+        }
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int position,
@@ -172,6 +179,7 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
             _day = calendar.get(Calendar.DAY_OF_MONTH);
             _month = calendar.get(Calendar.MONTH) + 1;
             _year = calendar.get(Calendar.YEAR);
+            formattedDate = _year + "-" + _month + "-" + _day;
         }
 
         myIntent.putExtra("MONTH", _month);
@@ -204,6 +212,10 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         emailPopUp.show();
     }
 
+    /**
+     * Used in GetRequest; not needed though (probably)
+     * @param output
+     */
     public void processFinish(String output)
     {
         Log.d("result", "SUCCESS");
@@ -213,13 +225,66 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         int i = 1;
 
         //Pattern pattern = Pattern.compile("showBookingForm(.*?);");
-        Pattern pattern = Pattern.compile("(lc_rm_a)");
+        Pattern pattern = Pattern.compile("(<a href=\"#\" class=\"lc_rm_a\" (.*)>&nbsp;</a>)");
         Matcher matcher = pattern.matcher(output);
         while (matcher.find())
         {
             availableBookings.add(matcher.group(1));
             Log.d("room", availableBookings.get(i-1));
             i++;
+        }
+    }
+
+    /**
+     * Used to handle incoming data from PostRequest
+     * @param output
+     */
+    public void processPOSTFinish(String output)
+    {
+        Log.d("hi", "made you look");
+
+        // regex
+        ArrayList<String> availableBookings = new ArrayList<String>();
+        int i = 1;
+
+        Pattern pattern = Pattern.compile("(id=\\\"(\\w*)\\\"\\s(\\S*)\\s(\\S*)\\s\\W\\s(\\S*)\\w\\W)");
+        Matcher matcher = pattern.matcher(output);
+        while (matcher.find())
+        {
+            availableBookings.add(matcher.group(1));
+            Log.d("room", availableBookings.get(i-1));
+            i++;
+        }
+
+        // parse and update hours
+        String ids[] = new String[i];
+        String rooms[] = new String[i];
+        String hours[] = new String[i];
+        for(int x = 0; x < i-1; x++)
+        {
+            Pattern p = Pattern.compile("\\\"(\\d*)\\\"");
+            Matcher m = p.matcher(availableBookings.get(x));
+            while (m.find())
+            {
+                ids[x] = m.group(1);
+                Log.d("ids", ids[x]);
+            }
+
+            p = Pattern.compile("\\'(\\w*-\\d*)");
+            m = p.matcher(availableBookings.get(x));
+            while (m.find())
+            {
+                rooms[x] = m.group(1);
+                Log.d("rooms", rooms[x]);
+            }
+
+            p = Pattern.compile("\\'(\\d*:\\d*\\w*\\W*\\d*\\W*\\d*\\w*)");
+            m = p.matcher(availableBookings.get(x));
+            while (m.find())
+            {
+                hours[x] = m.group(1);
+                Log.d("hours", hours[x]);
+            }
         }
     }
 
