@@ -98,7 +98,7 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         rooms.add("Select a room");
         rooms.add("PL-321");
         rooms.add("PL-323");
-        _room = "Select a Room";
+        _room = "Select a room";
         adapter_state = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, rooms);
         adapter_state.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         roomSpinner.setAdapter(adapter_state);
@@ -126,6 +126,14 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
                 String json = makeJSON(formattedDate);
                 PostRequest pr = new PostRequest(GroupActivity.this);
                 pr.execute("http://csusb.libcal.com/process_roombookings.php?m=calscroll&gid=1787&date=" + formattedDate, json);
+
+                _room = "Select a room";
+                _hour = "Select an hour";
+
+                adapter_state.clear();
+                adapter_state.addAll(populateRoomList());
+                adapter_state.notifyDataSetChanged();
+                roomSpinner.setSelection(0);
 
                 adapter_state2.clear();
                 adapter_state2.addAll(getHoursBasedOnRoom());
@@ -317,6 +325,16 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         return "{ 'm':'calscroll','gid':1787,'date':'" + date + "'}";
     }
 
+    private ArrayList<String> populateRoomList()
+    {
+        ArrayList<String> temp = new ArrayList<String>();
+        temp.add("Select a room");
+        temp.add("PL-321");
+        temp.add("PL-323");
+
+        return temp;
+    }
+
     private ArrayList<String> getHoursBasedOnRoom()
     {
         ArrayList<String> temp = new ArrayList<>();
@@ -338,7 +356,6 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
             {
                 if(availableRooms.get(i).equals(_room))
                     temp.add(availableHours.get(i));
-                Log.d("test: " + _room, Boolean.toString(_room.equals(availableRooms.get(i))));
             }
             return temp;
         }
