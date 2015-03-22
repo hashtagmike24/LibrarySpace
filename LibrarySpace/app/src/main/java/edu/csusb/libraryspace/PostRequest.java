@@ -71,6 +71,14 @@ public class PostRequest extends AsyncTask<String, Void, String>
                     .build();
             Request request = new Request.Builder()
                     .url(params[0])
+                    .header("Host", "csusb.libcal.com")
+                    //.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0")
+                    .header("Accept", "application/json, text/javascript, */*; q=0.01")
+                    .header("Accept-Language", "en-US,en;q=0.5")
+                    .header("Accept-Encoding", "gzip, deflate")
+                    .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .header("Referer", "http://csusb.libcal.com/booking/" + params[9])
                     .post(formBody)
                     .build();
             try
@@ -91,7 +99,7 @@ public class PostRequest extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String result)
     {
-        Log.d("result", result);
+        //Log.d("result", result);
         listener.processPOSTFinish(result);
     }
 }

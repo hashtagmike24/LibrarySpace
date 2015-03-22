@@ -127,8 +127,16 @@ public class BookingActivity extends ActionBarActivity implements PostRequest.As
         }
         else // if no errors
         {
+            String type = "";
+            if(_type.equals("Group Study Room"))
+                type = "groupstudy";
+            else if(_type.equals("Individual Study Carrel"))
+                type = "carrels";
+            else if(_type.equals("Multimedia Collaboration Room"))
+                type = "collaborate";
+
             PostRequest pr = new PostRequest(BookingActivity.this);
-            pr.execute("http://csusb.libcal.com/process_roombookings.php?m=booking_full", "", "bookingPOST", _sid, _gid, nameInput.getText().toString(), "", emailInput.getText().toString(), labelInput.getText().toString());
+            pr.execute("http://csusb.libcal.com/process_roombookings.php?m=booking_full", "", "bookingPOST", _sid, _gid, nameInput.getText().toString(), "", emailInput.getText().toString(), labelInput.getText().toString(), type);
         }
     }
 

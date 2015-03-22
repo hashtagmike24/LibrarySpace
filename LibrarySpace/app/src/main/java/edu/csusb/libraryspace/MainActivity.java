@@ -109,7 +109,7 @@ public class MainActivity extends ActionBarActivity {
     public void helpButtonOnClick(View view)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("CSUSB Library Study Space lets you reserve a study space (Group Study Room, Individual Study Carrel, Multimedia Collaboration Room) from CSUSB's Pfau Library! Here's the process:\n\n1) Select a study space type.\n\n2) Select a day from the calendar and one 1-hour slot.\n\n3) Submit your booking details (Name, School Email, optional public Booking Label).\n\n4) Within 15 minutes of making your reservation, open the confirmation email that was sent to your inbox.\n\n5) Your reservation is complete! Keep your final confirmation email as proof of booking and bring it with you.")
+        builder.setMessage("CSUSB Library Study Space lets you reserve a study room (Group Study Room, Individual Study Carrel, Multimedia Collaboration Room) from CSUSB's Pfau Library! Here's the process:\n\n1) Select a study room.\n\n2) Select a day and hour slot from the calendar.\n\n3) Submit your booking details (name, school email, public booking label).\n\n4) Within 15 minutes of making your reservation, open the confirmation email that was sent to your inbox.\n\n5) Your reservation is complete! Keep your final confirmation email as your proof of booking and bring it with you.")
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

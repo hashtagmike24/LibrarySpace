@@ -59,8 +59,6 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
     Spinner hourSpinner;
     String _hour;
 
-    PostRequest postRequest = new PostRequest(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,15 +216,6 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
 
             GroupActivity.this.startActivity(myIntent);
         }
-
-        /*if(_day == 0)
-        {
-            Calendar calendar = Calendar.getInstance();
-            _day = calendar.get(Calendar.DAY_OF_MONTH);
-            _month = calendar.get(Calendar.MONTH) + 1;
-            _year = calendar.get(Calendar.YEAR);
-            formattedDate = _year + "-" + _month + "-" + _day;
-        }*/
     }
 
     public void pdfButtonOnClick(View view)
