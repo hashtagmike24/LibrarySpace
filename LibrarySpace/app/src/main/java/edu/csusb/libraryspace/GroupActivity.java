@@ -19,15 +19,6 @@ import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-<<<<<<< HEAD
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.TimeZone;
-import org.w3c.dom.Text;
-import java.util.Date;
-import java.security.acl.Group;
-
-=======
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -38,12 +29,12 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
->>>>>>> origin/master
 
 public class GroupActivity extends ActionBarActivity implements OnItemSelectedListener, PostRequest.AsyncResponsePOST {
 
@@ -51,6 +42,15 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
     int _month = 0;
     int _day = 0;
     int _year = 0;
+
+    ArrayList<String> availableIDs = new ArrayList<String>();
+    ArrayList<String> availableRooms = new ArrayList<String>();
+    ArrayList<String> availableHours = new ArrayList<String>();
+
+    ArrayAdapter<String> adapter_state;
+    ArrayAdapter<String> adapter_state2;
+
+    String _id;
 
     String formattedDate;
 
@@ -86,24 +86,21 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         txtNextText.setTypeface(tf2);
 
         roomSpinner = (Spinner) findViewById(R.id.roomSpinner);
-<<<<<<< HEAD
         ArrayList<String> rooms = new ArrayList<String>();
         rooms.add("Select a room");
         rooms.add("PL-321");
         rooms.add("PL-323");
         _room = "Select a room";
         adapter_state = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, rooms);
-=======
-        String[] rooms = {"PL-321", "PL-323"};
-        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, rooms);
->>>>>>> parent of fa41451... Hours now update in real-time (w/ bugs)
         adapter_state.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         roomSpinner.setAdapter(adapter_state);
         roomSpinner.setOnItemSelectedListener(this);
 
         hourSpinner = (Spinner) findViewById(R.id.hourSpinner);
-        String[] hours = {"8:00 AM - 9:00AM", "9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 2:00 PM", "2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5:00 PM - 6:00 PM", "6:00 PM - 7:00 PM", "7:00 PM - 8:00 PM", "8:00 PM - 9:00 PM"};
-        ArrayAdapter<String> adapter_state2 = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, hours);
+        ArrayList<String> hours = new ArrayList<String>();
+        hours.add("Select an hour");
+        _hour = "Select an hour";
+        adapter_state2 = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, hours);
         adapter_state2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         hourSpinner.setAdapter(adapter_state2);
         hourSpinner.setOnItemSelectedListener(this);
@@ -120,8 +117,7 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
                 // Update Hours
                 String json = makeJSON(formattedDate);
                 PostRequest pr = new PostRequest(GroupActivity.this);
-                pr.execute("http://csusb.libcal.com/process_roombookings.php?m=calscroll&gid=1787&date=" + formattedDate, json);
-<<<<<<< HEAD
+                pr.execute("http://csusb.libcal.com/process_roombookings.php?m=calscroll&gid=1787&date=" + formattedDate, json, "calendarPOST");
 
                 _room = "Select a room";
                 _hour = "Select an hour";
@@ -134,26 +130,9 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
                 adapter_state2.clear();
                 adapter_state2.addAll(getHoursBasedOnRoom());
                 adapter_state2.notifyDataSetChanged();
-=======
->>>>>>> parent of fa41451... Hours now update in real-time (w/ bugs)
             }
         });
 
-<<<<<<< HEAD
-
-    //setMax Date
-    Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DATE,Calendar.getInstance().getActualMaximum(Calendar.DATE));
-        long date = calendar.getTime().getTime();
-        myCalendar.setMaxDate(date);
-
-        //setMin date
-        calendar.set(Calendar.DATE,Calendar.getInstance().getActualMinimum(Calendar.DATE));
-        long date2 = calendar.getTime().getTime();
-        myCalendar.setMinDate(date2);
-}
-
-=======
         myCalendar.setMinDate(System.currentTimeMillis() - 1000);
         myCalendar.setMaxDate(myCalendar.getDate() + (86400000 * 7)); // dat magic number doe
 
@@ -166,7 +145,6 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
             formattedDate = _year + "-" + _month + "-" + _day;
         }
     }
->>>>>>> origin/master
 
     public void onItemSelected(AdapterView<?> parent, View view, int position,
                                long id) {
@@ -176,6 +154,11 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         {
             roomSpinner.setSelection(position);
             _room = (String) roomSpinner.getSelectedItem();
+
+            adapter_state2.clear();
+            adapter_state2.add("Select an hour");
+            adapter_state2.addAll(getHoursBasedOnRoom());
+            adapter_state2.notifyDataSetChanged();
         }
         else if(spinner.getId() == R.id.hourSpinner)
         {
@@ -218,28 +201,32 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
     {
         Intent myIntent = new Intent(GroupActivity.this, ConditionsActivity.class);
 
-        if(_room.equals(""))
-            _room = "PL-321";
-        if(_hour.equals(""))
-            _hour = "9:00 AM - 10:00 AM";
+        if(_room.equals("Select a room")) // NOPE
+            Toast.makeText(getApplicationContext(), "Please select a room", Toast.LENGTH_LONG).show();
+        else if(_hour.equals("Select an hour") || _hour.equals("No hours available")) // NOPE
+            Toast.makeText(getApplicationContext(), "Please select an hour", Toast.LENGTH_LONG).show();
+        else // You go, Glen Coco
+        {
+            myIntent.putExtra("SID", getSID());
+            myIntent.putExtra("GID", "1787");
+            myIntent.putExtra("MONTH", _month);
+            myIntent.putExtra("DAY", _day);
+            myIntent.putExtra("YEAR", _year);
+            myIntent.putExtra("TYPE", "Group Study Room");
+            myIntent.putExtra("ROOM", _room);
+            myIntent.putExtra("HOUR", _hour);
 
-        if(_day == 0)
+            GroupActivity.this.startActivity(myIntent);
+        }
+
+        /*if(_day == 0)
         {
             Calendar calendar = Calendar.getInstance();
             _day = calendar.get(Calendar.DAY_OF_MONTH);
             _month = calendar.get(Calendar.MONTH) + 1;
             _year = calendar.get(Calendar.YEAR);
             formattedDate = _year + "-" + _month + "-" + _day;
-        }
-
-        myIntent.putExtra("MONTH", _month);
-        myIntent.putExtra("DAY", _day);
-        myIntent.putExtra("YEAR", _year);
-        myIntent.putExtra("TYPE", "Group Study Room");
-        myIntent.putExtra("ROOM", _room);
-        myIntent.putExtra("HOUR", _hour);
-
-        GroupActivity.this.startActivity(myIntent);
+        }*/
     }
 
     public void pdfButtonOnClick(View view)
@@ -263,77 +250,53 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
     }
 
     /**
-     * Used in GetRequest; not needed though (probably)
-     * @param output
-     */
-    public void processFinish(String output)
-    {
-        Log.d("result", "SUCCESS");
-
-        // regex
-        ArrayList<String> availableBookings = new ArrayList<String>();
-        int i = 1;
-
-        //Pattern pattern = Pattern.compile("showBookingForm(.*?);");
-        Pattern pattern = Pattern.compile("(<a href=\"#\" class=\"lc_rm_a\" (.*)>&nbsp;</a>)");
-        Matcher matcher = pattern.matcher(output);
-        while (matcher.find())
-        {
-            availableBookings.add(matcher.group(1));
-            Log.d("room", availableBookings.get(i-1));
-            i++;
-        }
-    }
-
-    /**
      * Used to handle incoming data from PostRequest
      * @param output
      */
     public void processPOSTFinish(String output)
     {
-        Log.d("hi", "made you look");
-
-        // regex
+        // regex setup
         ArrayList<String> availableBookings = new ArrayList<String>();
         int i = 1;
 
+        // black magic
         Pattern pattern = Pattern.compile("(id=\\\"(\\w*)\\\"\\s(\\S*)\\s(\\S*)\\s\\W\\s(\\S*)\\w\\W)");
         Matcher matcher = pattern.matcher(output);
         while (matcher.find())
         {
             availableBookings.add(matcher.group(1));
-            Log.d("room", availableBookings.get(i-1));
+            //Log.d("bookingTile", availableBookings.get(i-1));
             i++;
         }
 
         // parse and update hours
-        String ids[] = new String[i];
-        String rooms[] = new String[i];
-        String hours[] = new String[i];
+        availableIDs = new ArrayList<String>();
+        availableRooms = new ArrayList<String>();
+        availableHours = new ArrayList<String>();
         for(int x = 0; x < i-1; x++)
         {
             Pattern p = Pattern.compile("\\\"(\\d*)\\\"");
             Matcher m = p.matcher(availableBookings.get(x));
             while (m.find())
             {
-                ids[x] = m.group(1);
-                Log.d("ids", ids[x]);
+                availableIDs.add(m.group(1));
+                //Log.d("ids", availableIDs.get(x));
             }
 
             p = Pattern.compile("\\'(\\w*-\\d*)");
             m = p.matcher(availableBookings.get(x));
             while (m.find())
             {
-                rooms[x] = m.group(1);
-                Log.d("rooms", rooms[x]);
+                availableRooms.add(m.group(1));
+                //Log.d("rooms", availableRooms.get(x));
             }
 
             p = Pattern.compile("\\'(\\d*:\\d*\\w*\\W*\\d*\\W*\\d*\\w*)");
             m = p.matcher(availableBookings.get(x));
             while (m.find())
             {
-                hours[x] = m.group(1);
-                Log.d("hours", hours[x]);
+                availableHours.add(m.group(1));
+                //Log.d("hours", availableHours.get(x));
             }
         }
     }
@@ -342,7 +305,6 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
     {
         return "{ 'm':'calscroll','gid':1787,'date':'" + date + "'}";
     }
-<<<<<<< HEAD
 
     private ArrayList<String> populateRoomList()
     {
@@ -379,7 +341,16 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
             return temp;
         }
     }
-=======
->>>>>>> parent of fa41451... Hours now update in real-time (w/ bugs)
+
+    private String getSID()
+    {
+        String sid = "NOT VALID SID";
+        for(int x = 0; x < availableIDs.size(); x++)
+        {
+            if(availableRooms.get(x).equals(_room) && availableHours.get(x).equals(_hour))
+                sid = availableIDs.get(x);
+        }
+        return sid;
+    }
 }
 

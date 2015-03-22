@@ -10,6 +10,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.net.URL;
 
+// lol didn't use this class
 public class GetRequest extends AsyncTask<String, Void, String>
 {
     OkHttpClient client = new OkHttpClient();

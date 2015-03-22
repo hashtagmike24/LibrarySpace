@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +16,12 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class BookingActivity extends ActionBarActivity {
+
+public class BookingActivity extends ActionBarActivity implements PostRequest.AsyncResponsePOST {
 
     int _month;
     int _day;
@@ -24,6 +29,8 @@ public class BookingActivity extends ActionBarActivity {
     String _type;
     String _room;
     String _hour;
+    String _sid;
+    String _gid;
 
     TextView detailsText;
     EditText nameInput;
@@ -75,6 +82,8 @@ public class BookingActivity extends ActionBarActivity {
             _type = extras.getString("TYPE");
             _room = extras.getString("ROOM");
             _hour = extras.getString("HOUR");
+            _sid = extras.getString("SID");
+            _gid = extras.getString("GID");
 
             detailsText.setText(_room + " " + _hour + " on " + _month + "/" + _day + "/" + _year);
         }
@@ -118,18 +127,28 @@ public class BookingActivity extends ActionBarActivity {
         }
         else // if no errors
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("A confirmation email has been sent to your inbox! Please check it to confirm your booking details.\n\nPlease note that reservations must be confirmed within 15 minutes. Your room reservation is not finalized until you click the link in the email.")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent myIntent = new Intent(BookingActivity.this, MainActivity.class);
-                            BookingActivity.this.startActivity(myIntent);
-                        }
-                    });
-            AlertDialog emailPopUp = builder.create();
-            emailPopUp.show();
+            PostRequest pr = new PostRequest(BookingActivity.this);
+            pr.execute("http://csusb.libcal.com/process_roombookings.php?m=booking_full", "", "bookingPOST", _sid, _gid, nameInput.getText().toString(), "", emailInput.getText().toString(), labelInput.getText().toString());
         }
+    }
+
+    /**
+     * Used to handle incoming data from PostRequest
+     * @param output
+     */
+    public void processPOSTFinish(String output)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("A confirmation email has been sent to your inbox! Please check it to confirm your booking details.\n\nPlease note that reservations must be confirmed within 15 minutes. Your room reservation is not finalized until you click the link in the email.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent myIntent = new Intent(BookingActivity.this, MainActivity.class);
+                        BookingActivity.this.startActivity(myIntent);
+                    }
+                });
+        AlertDialog emailPopUp = builder.create();
+        emailPopUp.show();
     }
 }

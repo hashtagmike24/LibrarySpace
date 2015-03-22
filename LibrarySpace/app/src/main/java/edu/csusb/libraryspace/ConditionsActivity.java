@@ -20,6 +20,8 @@ public class ConditionsActivity extends ActionBarActivity {
     String _type;
     String _room;
     String _hour;
+    String _sid;
+    String _gid;
 
     TextView bodyText;
 
@@ -45,17 +47,18 @@ public class ConditionsActivity extends ActionBarActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
+
             _month = extras.getInt("MONTH");
             _day = extras.getInt("DAY");
             _year = extras.getInt("YEAR");
             _type = extras.getString("TYPE");
             _room = extras.getString("ROOM");
             _hour = extras.getString("HOUR");
+            _sid = extras.getString("SID");
+            _gid = extras.getString("GID");
 
             Toast.makeText(getApplicationContext(), _room + " " + _hour + " on " + _month + "/" + _day + "/" + _year, Toast.LENGTH_LONG).show();
         }
-
-
 
         bodyText = (TextView) findViewById(R.id.bodyText);
 
@@ -108,6 +111,8 @@ public class ConditionsActivity extends ActionBarActivity {
         myIntent.putExtra("TYPE", _type);
         myIntent.putExtra("ROOM", _room);
         myIntent.putExtra("HOUR", _hour);
+        myIntent.putExtra("SID", _sid);
+        myIntent.putExtra("GID", _gid);
 
         ConditionsActivity.this.startActivity(myIntent);
     }
