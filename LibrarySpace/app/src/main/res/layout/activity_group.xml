@@ -93,7 +93,8 @@
             android:background="#ff292f4c"
             android:onClick="pdfButtonOnClick"
             android:textSize="12sp"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:longClickable="true" />
 
         <Button
             android:layout_width="140dp"
