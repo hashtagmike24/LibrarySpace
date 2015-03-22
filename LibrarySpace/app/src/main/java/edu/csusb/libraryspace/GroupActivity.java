@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Debug;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +20,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.security.acl.Group;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class GroupActivity extends ActionBarActivity implements OnItemSelectedListener {
+public class GroupActivity extends ActionBarActivity implements OnItemSelectedListener, GetRequest.AsyncResponseGET {
 
     CalendarView myCalendar;
     int _month = 0;
@@ -35,10 +47,22 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
     Spinner hourSpinner;
     String _hour;
 
+    String web_data;
+    GetRequest getRequest = new GetRequest(this);
+    PostRequest postRequest = new PostRequest();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
+
+        getRequest.listener = this;
+
+        // Network connection
+        //getRequest.execute("http://www.lib.csusb.edu/services/studyRooms.html");
+        String json = makeJSON("2015-03-23");
+        postRequest.execute("http://csusb.libcal.com/process_roombookings.php?m=calscroll&gid=1787&date=2015-03-23", json); // Works whenever it feels like it. Don't piss off the CSUSB web server gods pls
+
 
         // Font path
         String fontPath = "fonts/dosis-regular.ttf";
@@ -82,6 +106,9 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
                 _year = year;
             }
         });
+
+        myCalendar.setMinDate(System.currentTimeMillis() - 1000);
+        myCalendar.setMaxDate(myCalendar.getDate() + (86400000 * 7)); // dat magic number doe
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int position,
@@ -176,4 +203,29 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
         AlertDialog emailPopUp = builder.create();
         emailPopUp.show();
     }
+
+    public void processFinish(String output)
+    {
+        Log.d("result", "SUCCESS");
+
+        // regex
+        ArrayList<String> availableBookings = new ArrayList<String>();
+        int i = 1;
+
+        //Pattern pattern = Pattern.compile("showBookingForm(.*?);");
+        Pattern pattern = Pattern.compile("(lc_rm_a)");
+        Matcher matcher = pattern.matcher(output);
+        while (matcher.find())
+        {
+            availableBookings.add(matcher.group(1));
+            Log.d("room", availableBookings.get(i-1));
+            i++;
+        }
+    }
+
+    private String makeJSON(String date)
+    {
+        return "{ 'm':'calscroll','gid':1787,'date':'" + date + "'}";
+    }
 }
+

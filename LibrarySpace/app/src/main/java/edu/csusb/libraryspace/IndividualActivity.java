@@ -79,6 +79,9 @@ public class IndividualActivity extends ActionBarActivity implements OnItemSelec
                 _year = year;
             }
         });
+
+        myCalendar.setMinDate(System.currentTimeMillis() - 1000);
+        myCalendar.setMaxDate(myCalendar.getDate() + (86400000 * 7)); // dat magic number doe
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int position,
