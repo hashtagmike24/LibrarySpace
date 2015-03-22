@@ -17,11 +17,13 @@ import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.security.acl.Group;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+import org.w3c.dom.Text;
+import java.util.Date;
+import java.security.acl.Group;
+
 
 public class GroupActivity extends ActionBarActivity implements OnItemSelectedListener {
 
@@ -82,7 +84,20 @@ public class GroupActivity extends ActionBarActivity implements OnItemSelectedLi
                 _year = year;
             }
         });
-    }
+
+
+    //setMax Date
+    Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE,Calendar.getInstance().getActualMaximum(Calendar.DATE));
+        long date = calendar.getTime().getTime();
+        myCalendar.setMaxDate(date);
+
+        //setMin date
+        calendar.set(Calendar.DATE,Calendar.getInstance().getActualMinimum(Calendar.DATE));
+        long date2 = calendar.getTime().getTime();
+        myCalendar.setMinDate(date2);
+}
+
 
     public void onItemSelected(AdapterView<?> parent, View view, int position,
                                long id) {
